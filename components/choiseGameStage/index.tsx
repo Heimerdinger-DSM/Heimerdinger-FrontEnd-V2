@@ -18,25 +18,27 @@ const ChoiseGameStage: NextPage<props> = ({ path }: props) => {
 
   return (
     <ChoiseGameStagePage>
-      <GameInfoWrap>
-        <Title>{gameInfo.title}</Title>
-        <Description>{gameInfo.description}</Description>
-      </GameInfoWrap>
-      <LevelBoxGrid>
-        {gameInfo.levelDescription.map((description, i) => (
-          <LevelBox key={i}>
-            <LevelBoxItem>
-              <div>
-                <Level>{i + 1}단계</Level>
-                <LevelDescription>{description}</LevelDescription>
-              </div>
-              <StartBtn onClick={() => goGamePage(i + 1)}>
-                시작하기&gt;
-              </StartBtn>
-            </LevelBoxItem>
-          </LevelBox>
-        ))}
-      </LevelBoxGrid>
+      <ChoiseGameStageWrap>
+        <GameInfoWrap>
+          <Title>{gameInfo.title}</Title>
+          <Description>{gameInfo.description}</Description>
+        </GameInfoWrap>
+        <LevelBoxGrid>
+          {gameInfo.levelDescription.map((description, i) => (
+            <LevelBox key={i}>
+              <LevelBoxItem>
+                <div>
+                  <Level>{i + 1}단계</Level>
+                  <LevelDescription>{description}</LevelDescription>
+                </div>
+                <StartBtn onClick={() => goGamePage(i + 1)}>
+                  시작하기&gt;
+                </StartBtn>
+              </LevelBoxItem>
+            </LevelBox>
+          ))}
+        </LevelBoxGrid>
+      </ChoiseGameStageWrap>
     </ChoiseGameStagePage>
   );
 };
@@ -109,11 +111,13 @@ const GameInfoWrap = styled.div`
   margin-top: 56px;
 `;
 
+const ChoiseGameStageWrap = styled.div`
+  width: fit-content;
+  margin: 0 auto;
+`;
+
 const ChoiseGameStagePage = styled.main`
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 `;
 
 export default ChoiseGameStage;
