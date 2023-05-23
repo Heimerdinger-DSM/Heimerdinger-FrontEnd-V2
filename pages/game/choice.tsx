@@ -1,7 +1,7 @@
 export default function Choice() {
   return (
     <>
-      <h1>gameChoice</h1>
+      <h1>choice</h1>
     </>
   );
 }
