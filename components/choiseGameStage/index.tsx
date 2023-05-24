@@ -75,7 +75,7 @@ const LevelBoxItem = styled.div`
 `;
 
 const LevelBox = styled.div`
-  width: 280px;
+  width: 100%;
   height: 85px;
   background-color: ${theme.whiteColor};
   border-radius: 8px;
@@ -88,12 +88,12 @@ const LevelBox = styled.div`
 `;
 
 const LevelBoxGrid = styled.div`
-  width: fit-content;
+  width: 1000px;
   height: fit-content;
   margin-top: 60px;
 
   display: grid;
-  grid-template-columns: repeat(3, 280px);
+  grid-template-columns: repeat(3, 1fr);
   gap: 40px 20px;
 `;
 
@@ -105,6 +105,7 @@ const Description = styled.p`
 const Title = styled.p`
   font-size: 32px;
   font-weight: bold;
+  color: ${theme.strongGrayColor};
 `;
 
 const GameInfoWrap = styled.div`
