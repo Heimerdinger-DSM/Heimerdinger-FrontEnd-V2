@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 
 export default function Banenr() {
   return (
-    <Contaienr>
+    <Contaienr id="banner">
       <Wrapper>
         <Circle1></Circle1>
         <Circle2></Circle2>
@@ -27,6 +27,7 @@ export default function Banenr() {
 const Contaienr = styled.div`
   width: 100%;
   height: 450px;
+  margin-top: 70px;
   display: flex;
   align-items: center;
   justify-content: center;
