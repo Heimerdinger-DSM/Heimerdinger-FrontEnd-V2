@@ -17,12 +17,16 @@ export default function Main() {
 }
 
 const Container = styled.div`
-  width: 520px;
-  height: 580px;
+  width: 480px;
+  height: 540px;
+  margin-top: 70px;
+  border: 1px solid ${theme.lightGrayColor};
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: ${theme.whiteColor};
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
 `;
 
 const Wrapper = styled.div`
