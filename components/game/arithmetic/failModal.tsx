@@ -2,9 +2,14 @@ import { NextPage } from "next";
 import GameModalTemplate from "./gameModalTemplate";
 import { MouseEvent } from "react";
 
-const GameClearModel: NextPage = () => {
+interface props {
+  level: number;
+}
+
+/** 오답 */
+const FailModel: NextPage<props> = ({ level }: props) => {
   const props = {
-    title: "랜덤 사칙연산\n1단계 성공을 축하합니다! 🥳",
+    title: `랜덤 사칙연산\n${level}단계 도전 실패 하셨습니다. 🥲`,
     firstButton: {
       text: "다음 단계로",
       action: (e: MouseEvent<HTMLButtonElement>) => {},
@@ -22,4 +27,4 @@ const GameClearModel: NextPage = () => {
   );
 };
 
-export default GameClearModel;
+export default FailModel;
