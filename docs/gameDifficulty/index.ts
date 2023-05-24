@@ -6,7 +6,7 @@ export const gameDifficultyDoc = {
       "한 자리 수(+, -)",
       "한 자리 수(+, -, *, /)",
       "두 자리 수(+, -)",
-      "두 자리 수 (*, /) 한 자리 수",
+      "두 자리 수 (*, /)",
       "All 랜덤",
     ],
   },
@@ -16,3 +16,11 @@ export const gameDifficultyDoc = {
     levelDescription: ["4x2", "4x4", "4x6", "6x6", "7x7"],
   },
 };
+
+export const gameLevelDescription = [
+  "한 자리 수 (+, -) 문제가 나옵니다.",
+  "한 자리 수 (+, -, x, /) 문제가 나옵니다.",
+  "두 자리 수 (+, -) 문제가 나옵니다.",
+  "두 자리 수 (x, /) 문제가 나옵니다.",
+  "1~4 단계의 문제가 랜덤하게 출제됩니다.",
+];
