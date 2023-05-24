@@ -22,7 +22,6 @@ const Container = styled.div`
   width: 300px;
   height: 300px;
   border: 1px solid ${theme.thinGrayColor};
-
   border-radius: 20px;
   display: flex;
   align-items: center;
