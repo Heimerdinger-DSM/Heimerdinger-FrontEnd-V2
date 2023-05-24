@@ -45,9 +45,84 @@ export default function Game() {
           <BtnText>그만두기</BtnText>
         </ActionBtn>
       </ActionBtnWrap>
+      <GameWidget>
+        <Instruction>
+          {"연산식을 보고 아래 3개의 카드 중 정답을 선택해주세요"}
+        </Instruction>
+        <Question>{"3 + 4 = ?"}</Question>
+        <AnswerWrap>
+          {[5, 7, 10].map((answer) => (
+            <Answer key={answer}>{answer}</Answer>
+          ))}
+        </AnswerWrap>
+      </GameWidget>
     </GamePage>
   );
 }
+
+const Answer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 130px;
+  height: 130px;
+
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+
+  font-weight: bold;
+  font-size: 50px;
+
+  border-radius: 8px;
+  border: 2px solid ${theme.mainPurpleColor};
+  background-color: ${theme.whiteColor};
+  color: ${theme.mainNavyColor};
+
+  &:hover {
+    background-color: ${theme.mainPurpleColor};
+    color: ${theme.whiteColor};
+  }
+`;
+
+const AnswerWrap = styled.div`
+  display: flex;
+  gap: 80px;
+`;
+
+const Instruction = styled.p`
+  font-weight: bold;
+  font-size: 20px;
+
+  color: ${theme.blackColor};
+`;
+
+const Question = styled.p`
+  font-weight: bold;
+  font-size: 60px;
+
+  color: ${theme.blackColor};
+`;
+
+const GameWidget = styled.div`
+  width: 100%;
+  height: 440px;
+
+  background: ${theme.whiteColor};
+
+  border: 1px solid ${theme.lightGrayColor};
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+
+  margin-top: 24px;
+
+  padding: 50px 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+`;
 
 const BtnText = styled.p`
   font-size: 18px;
