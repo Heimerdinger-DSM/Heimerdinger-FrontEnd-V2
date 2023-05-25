@@ -1,7 +1,8 @@
-import { theme } from "@/styles/theme";
 import styled from "@emotion/styled";
+import { theme } from "@/styles/theme";
+import Link from "next/link";
 
-export default function Main() {
+export default function Start() {
   return (
     <Container>
       <Wrapper>
@@ -10,7 +11,9 @@ export default function Main() {
           <Content>(SMCQ, Subjective Memory Complaints Questionnaire)</Content>
         </TextBox>
         <Image src="/imgs/smcq/chart.png" />
-        <Button>시작하기</Button>
+        <Link href="/smcq/ready">
+          <Button>시작하기</Button>
+        </Link>
       </Wrapper>
     </Container>
   );
@@ -30,6 +33,7 @@ const Container = styled.div`
 `;
 
 const Wrapper = styled.div`
+  height: 430px;
   display: flex;
   gap: 40px;
   align-items: center;
@@ -58,7 +62,7 @@ const Content = styled.p`
 `;
 
 const Image = styled.img`
-  width: 300px;
+  width: 260px;
 `;
 
 const Button = styled.button`

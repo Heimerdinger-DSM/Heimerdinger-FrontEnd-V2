@@ -1,11 +1,11 @@
-import Main from "@/components/smcq/main";
 import { theme } from "@/styles/theme";
 import styled from "@emotion/styled";
+import ReadyItem from "@/components/smcq/readyItem";
 
-export default function SMCQ() {
+export default function Ready() {
   return (
     <Container>
-      <Main />
+      <ReadyItem />
     </Container>
   );
 }
