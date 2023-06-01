@@ -1,14 +1,15 @@
-import Background from "@/components/signup/background";
 import { theme } from "@/styles/theme";
 import styled from "@emotion/styled";
+import TestItem from "@/components/smcq/testItem";
 
-export default function Signup() {
+export default function Ready() {
   return (
     <Container>
-      <Background />
+      <TestItem />
     </Container>
   );
 }
+
 const Container = styled.div`
   width: 100%;
   height: 100vh;
