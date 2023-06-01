@@ -1,16 +1,16 @@
-import ContactBox from "@/components/communication/create/contactBox";
-import TitleBox from "@/components/communication/create/titleBox";
-import WriteBox from "@/components/communication/create/writeBox";
+import ItemBox from "@/components/communication/listMain/ItemBox";
+import ListBox from "@/components/communication/listMain/listBox";
+import TitleBox from "@/components/communication/listMain/titleBox";
 import { theme } from "@/styles/theme";
 import styled from "@emotion/styled";
 
-export default function Create() {
+export default function ListMain() {
   return (
     <Container>
       <Wrapper>
         <TitleBox />
-        <ContactBox />
-        <WriteBox />
+        <ItemBox />
+        <ListBox />
       </Wrapper>
     </Container>
   );

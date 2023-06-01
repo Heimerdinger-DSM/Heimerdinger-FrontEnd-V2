@@ -18,6 +18,7 @@ export default function Main() {
 
 const Container = styled.div`
   width: 100%;
+  margin-top: 70px;
   display: flex;
   align-items: center;
   justify-content: center;
