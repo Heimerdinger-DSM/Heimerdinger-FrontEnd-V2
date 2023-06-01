@@ -1,7 +1,34 @@
 import { theme } from "@/styles/theme";
 import styled from "@emotion/styled";
+import { link } from "fs";
+import { useState } from "react";
+import { toast } from "react-toastify";
 
 export default function ContactBox() {
+  const [contactState, setContactState] = useState({
+    link: "",
+    email: "",
+  });
+
+  const { link, email } = contactState;
+
+  const isEmailFormat = (emailText: string) => {
+    const snsLinkRegex =
+      /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+
+    return snsLinkRegex.test(emailText);
+  };
+
+  const ContactInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value, name } = e.target;
+
+    if (name === "email" && isEmailFormat(value)) {
+      toast.success("올바른 입력입니다.");
+    }
+
+    setContactState((pre) => ({ ...pre, [name]: value }));
+  };
+
   return (
     <Container>
       <TitleBox>
@@ -13,11 +40,29 @@ export default function ContactBox() {
       <ItemBox>
         <InputBox>
           <Text>SNS 링크</Text>
-          <Input placeholder="연락할 수 있는 SNS 링크를 입력해주세요." />
+          <Input
+            name="link"
+            value={link}
+            onChange={ContactInputChange}
+            minLength={2}
+            maxLength={50}
+            placeholder="연락할 수 있는 SNS 링크를 입력해주세요."
+          />
         </InputBox>
         <InputBox>
           <Text>이메일</Text>
-          <Input placeholder="이메일 주소를 입력해주세요." />
+          <Input
+            name="email"
+            value={email}
+            onChange={ContactInputChange}
+            minLength={5}
+            maxLength={30}
+            placeholder="이메일 주소를 입력해주세요."
+          />
+
+          <Message>
+            {isEmailFormat(email) || "이메일을 형식에 맞게 작성해주세요."}
+          </Message>
         </InputBox>
       </ItemBox>
     </Container>
@@ -67,9 +112,10 @@ const Content = styled.p`
 
 const ItemBox = styled.div`
   width: 100%;
+  height: 120px;
   margin-top: 32px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
 `;
 
@@ -98,4 +144,10 @@ const Input = styled.input`
   font-weight: 500;
   color: ${theme.blackColor};
   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.15);
+`;
+
+const Message = styled.p`
+  font-size: 12px;
+  font-weight: 700;
+  color: ${theme.RedColor};
 `;

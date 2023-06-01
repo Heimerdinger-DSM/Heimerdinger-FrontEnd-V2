@@ -1,20 +1,35 @@
 import { theme } from "@/styles/theme";
 import styled from "@emotion/styled";
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
+import { toast } from "react-toastify";
 
 export default function WriteBox() {
   const tagItem = ["중구", "동구", "서구", "유성구", "대덕구"];
-  const [link, setLink] = useState("");
+  const [writeState, setWriteState] = useState({
+    title: "",
+    content: "",
+  });
 
-  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
-    changeState(event.target.value);
+  const { title, content } = writeState;
+
+  const WriteInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value, name } = e.target;
+
+    if (value === "") {
+      toast.error("공백은 입력할 수 없습니다.");
+    } else {
+      if (name === "title" && value.length >= 20) {
+        toast.error("제목은 20자 이하로 작성할 수 있습니다.");
+      }
+      if (name === "content" && value.length >= 255) {
+        toast.error("내용은 255자 이하로 작성할 수 있습니다.");
+      }
+    }
+
+    setWriteState((pre) => ({ ...pre, [name]: value }));
   };
 
-  const changeState = (newText: string) => {
-    setLink(newText);
-  };
-
-  //지역 태그 선택--------------------------//
+  //지역 태그 선택
   const [tag, setTag] = useState<boolean[]>([
     false,
     false,
@@ -33,7 +48,6 @@ export default function WriteBox() {
       {tag[i] ? <ClickTag>{list}</ClickTag> : <Tag>{list}</Tag>}
     </div>
   ));
-  //-------------------------------------//
 
   return (
     <Container>
@@ -57,11 +71,12 @@ export default function WriteBox() {
             <Strong>*</Strong>
           </TextBox>
           <Input
-            name="link"
-            value={link}
-            onChange={onChange}
+            name="title"
+            value={title}
+            onChange={WriteInputChange}
+            minLength={1}
+            maxLength={20}
             placeholder="글 제목을 입력해주세요."
-            maxLength={50}
           />
         </InputBox>
         <InputBox>
@@ -69,7 +84,14 @@ export default function WriteBox() {
             <Text>내용</Text>
             <Strong>*</Strong>
           </TextBox>
-          <Textarea placeholder="글 내용을 입력해주세요."></Textarea>
+          <Textarea
+            name="content"
+            value={content}
+            onChange={WriteInputChange}
+            minLength={1}
+            maxLength={255}
+            placeholder="글 내용을 입력해주세요."
+          ></Textarea>
         </InputBox>
       </ItemBox>
 

@@ -16,36 +16,36 @@ export default function ListBox() {
   return (
     <Container>
       {listItem.map((arr, i) => (
-        <Link href="/" key={i}>
-          <Item>
-            <Wrapper>
-              <TopBox>
-                <Title>{arr.title}</Title>
-                <StarBox>
-                  <Star
-                    src={`/imgs/communication/${
-                      starState ? "s" : "noS"
-                    }tar.png`}
-                    onClick={onStarState}
-                  />
-                  <StarNumber>{arr.starNumber}</StarNumber>
-                </StarBox>
-              </TopBox>
+        <Cover key={i}>
+          <StarBox>
+            <Star
+              src={`/imgs/communication/${starState ? "s" : "noS"}tar.png`}
+              onClick={onStarState}
+            />
+            <StarNumber>{arr.starNumber}</StarNumber>
+          </StarBox>
+          <Link href="/communication/detail/1">
+            <Item>
+              <Wrapper>
+                <TopBox>
+                  <Title>{arr.title}</Title>
+                </TopBox>
 
-              <UserBox>
-                <Nickname>{arr.nickname}</Nickname>
-                <Id>{arr.id}</Id>
-              </UserBox>
+                <UserBox>
+                  <Nickname>{arr.nickname}</Nickname>
+                  <Id>{arr.id}</Id>
+                </UserBox>
 
-              <Content>{arr.content}</Content>
+                <Content>{arr.content}</Content>
 
-              <BottomBox>
-                <Date>{arr.date}</Date>
-                <Tag>{arr.tag}</Tag>
-              </BottomBox>
-            </Wrapper>
-          </Item>
-        </Link>
+                <BottomBox>
+                  <Date>{arr.date}</Date>
+                  <Tag>{arr.tag}</Tag>
+                </BottomBox>
+              </Wrapper>
+            </Item>
+          </Link>
+        </Cover>
       ))}
     </Container>
   );
@@ -58,6 +58,12 @@ const Container = styled.div`
   grid-template-columns: repeat(3, 280px);
   grid-column-gap: 30px;
   grid-row-gap: 30px;
+`;
+
+const Cover = styled.div`
+  position: relative;
+  width: 280px;
+  height: 330px;
 `;
 
 const Item = styled.div`
@@ -92,11 +98,15 @@ const Title = styled.h1`
 `;
 
 const StarBox = styled.div`
+  position: absolute;
+  top: 30px;
+  right: 30px;
   display: flex;
   gap: 6px;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  z-index: 10;
 `;
 
 const Star = styled.img`
