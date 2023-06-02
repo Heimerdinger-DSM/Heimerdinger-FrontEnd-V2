@@ -1,11 +1,11 @@
-import Background from "@/components/login/background";
 import { theme } from "@/styles/theme";
 import styled from "@emotion/styled";
+import Start from "@/components/smcq/start";
 
-export default function Login() {
+export default function Main() {
   return (
     <Container>
-      <Background />
+      <Start />
     </Container>
   );
 }
