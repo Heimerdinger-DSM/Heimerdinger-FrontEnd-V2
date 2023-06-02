@@ -1,8 +1,92 @@
 import { theme } from "@/styles/theme";
 import styled from "@emotion/styled";
+import { useRef, useState } from "react";
+import { useRouter } from "next/router";
 import Link from "next/link";
+import { toast } from "react-toastify";
+import { formatInput } from "@/util/functions/formatInput";
+import { SignUpType } from "@/util/interface/signup";
+import { postSignUp } from "@/util/api/signup";
 
 export default function Item() {
+  const [signupState, setSignupState] = useState<SignUpType>({
+    nickname: "",
+    id: "",
+    password: "",
+    passwordCheck: "",
+  });
+  const router = useRouter();
+  const ref = useRef<HTMLInputElement>(null);
+  const toastId = useRef<any>(null);
+
+  const { nickname, id, password, passwordCheck } = signupState;
+
+  const SignUpInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value, name } = e.target;
+
+    if (
+      name === "nickname" &&
+      /[^a-zA-Z0-9ㄱ-ㅎ가-힣ㅏ-ㅣ]/.test(value) &&
+      !toast.isActive(toastId.current)
+    ) {
+      toastId.current = toast.error("특수문자는 입력할 수 없습니다.");
+    }
+    if (
+      name === "id" &&
+      /[^a-zA-Z0-9]/.test(value) &&
+      !toast.isActive(toastId.current)
+    ) {
+      toastId.current = toast.error(
+        "아이디는 영문, 숫자 형식으로 구성되어야 합니다."
+      );
+    }
+    if (
+      name === "password" &&
+      /[^a-zA-Z0-9\d@$!%*#?&]/.test(value) &&
+      !toast.isActive(toastId.current)
+    ) {
+      toastId.current = toast.error(
+        "비밀번호는 영문, 숫자, 특수문자 형식으로 구성되어야 합니다."
+      );
+    }
+
+    const formmatedVlaue = formatInput(value, name);
+
+    setSignupState({
+      ...signupState,
+      [name]: formmatedVlaue,
+    });
+  };
+
+  const submitSignup = async () => {
+    if (nickname === "" || id === "" || password === "") {
+      toast.error("채워지지 않은 입력칸이 있습니다.");
+    } else if (password !== passwordCheck) {
+      toast.error("password가 일치 하지 않습니다!");
+      setSignupState((pre) => ({ ...pre, passwordCheck: "" }));
+      ref.current?.focus();
+    } else {
+      try {
+        await postSignUp({
+          nickname: nickname,
+          id: id,
+          password: password,
+          passwordCheck: passwordCheck,
+        });
+        toast.success("회원가입에 성공했습니다!");
+        router.push("/");
+      } catch (error) {
+        toast.error("회원가입에 실패했습니다!");
+        setSignupState({
+          nickname: "",
+          id: "",
+          password: "",
+          passwordCheck: "",
+        });
+      }
+    }
+  };
+
   return (
     <Container>
       <TitleBox>
@@ -13,24 +97,59 @@ export default function Item() {
       <ItemBox>
         <InputBox>
           <Summary>닉네임</Summary>
-          <Input placeholder="닉네임을 입력해주세요" />
+          <Input
+            name="nickname"
+            value={nickname}
+            onChange={SignUpInputChange}
+            minLength={2}
+            maxLength={8}
+            placeholder="닉네임을 입력해주세요"
+            autoComplete="off"
+          />
         </InputBox>
         <InputBox>
           <Summary>아이디</Summary>
           <Overlap>중복확인</Overlap>
-          <Input placeholder="아이디를 입력해주세요" />
+          <Input
+            name="id"
+            value={id}
+            onChange={SignUpInputChange}
+            minLength={8}
+            maxLength={20}
+            placeholder="아이디를 입력해주세요"
+            autoComplete="off"
+          />
         </InputBox>
         <InputBox>
           <Summary>비밀번호</Summary>
-          <Input placeholder="비밀번호를 입력해주세요" />
+          <Input
+            name="password"
+            value={password}
+            onChange={SignUpInputChange}
+            minLength={10}
+            maxLength={20}
+            placeholder="비밀번호를 입력해주세요"
+            autoComplete="off"
+            type="password"
+          />
         </InputBox>
         <InputBox>
           <Summary>비밀번호 확인</Summary>
-          <Input placeholder="비밀번호를 다시 입력해주세요" />
+          <Input
+            ref={ref}
+            name="passwordCheck"
+            value={passwordCheck}
+            onChange={SignUpInputChange}
+            minLength={10}
+            maxLength={20}
+            placeholder="비밀번호를 다시 입력해주세요"
+            autoComplete="off"
+            type="password"
+          />
         </InputBox>
       </ItemBox>
 
-      <Button>회원가입</Button>
+      <Button onClick={submitSignup}>회원가입</Button>
       <RouteBox>
         <Text>기존 회원이신가요?</Text>
         <Link href="/login">
