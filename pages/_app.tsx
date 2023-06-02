@@ -13,7 +13,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <Layouts>
           <Header />
           <Component {...pageProps} />
-          <ToastContainer />
+          <ToastContainer autoClose={1200} />
         </Layouts>
       </RecoilRoot>
     </>
