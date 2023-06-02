@@ -2,16 +2,12 @@ import Header from "@/components/common/header";
 import Layouts from "@/components/layouts";
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
+import { ToastContainer } from "react-toastify";
+import { RecoilRoot } from "recoil";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
-<<<<<<< Updated upstream
-      <Layouts>
-        <Header />
-        <Component {...pageProps} />
-      </Layouts>
-=======
       <RecoilRoot>
         <Layouts>
           <Header />
@@ -19,7 +15,6 @@ export default function App({ Component, pageProps }: AppProps) {
           <ToastContainer autoClose={1200} />
         </Layouts>
       </RecoilRoot>
->>>>>>> Stashed changes
     </>
   );
 }
