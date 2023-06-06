@@ -73,8 +73,9 @@ export default function Item() {
           password: password,
           passwordCheck: passwordCheck,
         });
+
         toast.success("회원가입에 성공했습니다!");
-        router.push("/");
+        router.push("/login");
       } catch (error) {
         toast.error("회원가입에 실패했습니다!");
         setSignupState({
