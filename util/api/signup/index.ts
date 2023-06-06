@@ -1,10 +1,10 @@
 import axios from "axios";
 import { SignUpType } from "@/util/interface/signup";
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+import instance from "@/util/axios";
 
 export const postSignUp = async (signData: SignUpType) => {
   try {
-    await axios.post(`${BASE_URL}/user`, signData);
+    await instance.post(`/auth/signup`, signData);
   } catch (error) {
     throw error;
   }
