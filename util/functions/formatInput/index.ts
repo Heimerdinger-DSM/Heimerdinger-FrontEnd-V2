@@ -8,7 +8,7 @@ export const formatInput = (value: string, name: string): string => {
   if (name === "nickname") {
     return value.replace(/[^ㄱ-ㅎ가-힣ㅏ-ㅣA-Za-z0-9]/g, "");
   }
-  if (name === "id") {
+  if (name === "account_id") {
     return value.replace(/[^A-Za-z0-9\d]/g, "");
   }
   if (name === "password") {
