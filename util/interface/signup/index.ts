@@ -1,6 +1,6 @@
 export interface SignUpType {
   nickname: string;
-  id: string;
+  account_id: string;
   password: string;
   passwordCheck: string;
 }

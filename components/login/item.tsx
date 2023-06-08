@@ -2,28 +2,31 @@ import { theme } from "@/styles/theme";
 import { postLogin } from "@/util/api/login";
 import { formatInput } from "@/util/functions/formatInput";
 import { LoginType } from "@/util/interface/login";
+import { areYouLogin } from "@/util/store/areYouLogin";
 import styled from "@emotion/styled";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useRef, useState } from "react";
 import { toast } from "react-toastify";
+import { useRecoilState } from "recoil";
 
 export default function Item() {
   const [loginState, setLoginState] = useState<LoginType>({
-    id: "",
+    account_id: "",
     password: "",
   });
   const toastId = useRef<any>(null);
   const router = useRouter();
   const ref = useRef<HTMLInputElement>(null);
+  const [loginHeaderState, setLoginHeaderState] = useRecoilState(areYouLogin);
 
-  const { id, password } = loginState;
+  const { account_id, password } = loginState;
 
   const SignUpInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
 
     if (
-      name === "id" &&
+      name === "account_id" &&
       /[^a-zA-Z0-9]/.test(value) &&
       !toast.isActive(toastId.current)
     ) {
@@ -50,20 +53,21 @@ export default function Item() {
   };
 
   const submitLogin = async () => {
-    if (id === "" || password === "") {
+    if (account_id === "" || password === "") {
       toast.error("채워지지 않은 입력칸이 있습니다.");
     } else {
       try {
         await postLogin({
-          id: id,
-          password: password,
+          account_id,
+          password,
         });
         toast.success("로그인에 성공했습니다!");
+        setLoginHeaderState(true);
         router.push("/");
       } catch (error) {
-        toast.error("email, password가 일치하지 않습니다.");
+        toast.error("id, password가 일치하지 않습니다.");
         setLoginState({
-          id,
+          account_id,
           password: "",
         });
         ref.current?.focus();
@@ -81,8 +85,8 @@ export default function Item() {
         <InputBox>
           <Summary>아이디</Summary>
           <Input
-            name="id"
-            value={id}
+            name="account_id"
+            value={account_id}
             onChange={SignUpInputChange}
             minLength={8}
             maxLength={20}

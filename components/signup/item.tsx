@@ -11,7 +11,7 @@ import { postSignUp } from "@/util/api/signup";
 export default function Item() {
   const [signupState, setSignupState] = useState<SignUpType>({
     nickname: "",
-    id: "",
+    account_id: "",
     password: "",
     passwordCheck: "",
   });
@@ -19,7 +19,7 @@ export default function Item() {
   const ref = useRef<HTMLInputElement>(null);
   const toastId = useRef<any>(null);
 
-  const { nickname, id, password, passwordCheck } = signupState;
+  const { nickname, account_id, password, passwordCheck } = signupState;
 
   const SignUpInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
@@ -59,7 +59,7 @@ export default function Item() {
   };
 
   const submitSignup = async () => {
-    if (nickname === "" || id === "" || password === "") {
+    if (nickname === "" || account_id === "" || password === "") {
       toast.error("채워지지 않은 입력칸이 있습니다.");
     } else if (password !== passwordCheck) {
       toast.error("password가 일치 하지 않습니다!");
@@ -69,7 +69,7 @@ export default function Item() {
       try {
         await postSignUp({
           nickname: nickname,
-          id: id,
+          account_id: account_id,
           password: password,
           passwordCheck: passwordCheck,
         });
@@ -80,7 +80,7 @@ export default function Item() {
         toast.error("회원가입에 실패했습니다!");
         setSignupState({
           nickname: "",
-          id: "",
+          account_id: "",
           password: "",
           passwordCheck: "",
         });
@@ -112,8 +112,8 @@ export default function Item() {
           <Summary>아이디</Summary>
           <Overlap>중복확인</Overlap>
           <Input
-            name="id"
-            value={id}
+            name="account_id"
+            value={account_id}
             onChange={SignUpInputChange}
             minLength={8}
             maxLength={20}
