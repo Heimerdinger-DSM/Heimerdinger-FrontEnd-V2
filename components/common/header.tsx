@@ -1,8 +1,11 @@
 import { theme } from "@/styles/theme";
+import { areYouLogin } from "@/util/store/areYouLogin";
 import styled from "@emotion/styled";
 import Link from "next/link";
+import { useRecoilValue } from "recoil";
 
 export default function Header() {
+  const version = useRecoilValue(areYouLogin);
   return (
     <Container>
       <Wrapper>
@@ -25,9 +28,15 @@ export default function Header() {
             </Link>
           </TextBox>
         </Frame>
-        <Link href="/login">
-          <Button>로그인</Button>
-        </Link>
+        {version ? (
+          <Link href="/login">
+            <Button>로그인</Button>
+          </Link>
+        ) : (
+          <Link href="/mypage">
+            <Image src="/imgs/header/profile.png" />
+          </Link>
+        )}
       </Wrapper>
     </Container>
   );
@@ -93,4 +102,8 @@ const Button = styled.button`
   color: ${theme.whiteColor};
   background-color: ${theme.mainPurpleColor};
   cursor: pointer;
+`;
+
+const Image = styled.img`
+  width: 40px;
 `;
