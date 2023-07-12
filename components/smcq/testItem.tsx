@@ -21,7 +21,6 @@ export default function TestItem() {
     if (pageIndex <= 12) {
       setPageIndex((pre) => pre + 1);
     } else {
-      setResult(0);
       router.push("/smcq/result");
     }
   };

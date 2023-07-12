@@ -7,6 +7,7 @@ import { yesValue } from "@/util/store/yesValue";
 
 export default function Result() {
   const result = useRecoilValue(yesValue);
+  console.log(result);
   return <Container>{result <= 7 ? <Nomal /> : <Disorder />}</Container>;
 }
 

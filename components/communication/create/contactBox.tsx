@@ -1,16 +1,18 @@
 import { theme } from "@/styles/theme";
+import { createContact } from "@/util/store/createContact";
+import { createState } from "@/util/store/createState";
 import styled from "@emotion/styled";
 import { link } from "fs";
-import { useState } from "react";
+import { useRouter } from "next/router";
+import { useRef, useState } from "react";
 import { toast } from "react-toastify";
+import { useRecoilState } from "recoil";
 
 export default function ContactBox() {
-  const [contactState, setContactState] = useState({
-    link: "",
-    email: "",
-  });
+  const [contactState, setContactState] = useRecoilState(createState);
+  const toastId = useRef<any>(null);
 
-  const { link, email } = contactState;
+  const { url, email } = contactState;
 
   const isEmailFormat = (emailText: string) => {
     const snsLinkRegex =
@@ -22,8 +24,20 @@ export default function ContactBox() {
   const ContactInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
 
-    if (name === "email" && isEmailFormat(value)) {
-      toast.success("올바른 입력입니다.");
+    if (
+      name === "email" &&
+      isEmailFormat(value) &&
+      !toast.isActive(toastId.current)
+    ) {
+      toastId.current = toast.success("올바른 입력입니다.");
+    } else if (
+      name === "url" &&
+      url.length > 50 &&
+      !toast.isActive(toastId.current)
+    ) {
+      toastId.current = toast.success(
+        "link는 최대 50자까지 입력할 수 있습니다."
+      );
     }
 
     setContactState((pre) => ({ ...pre, [name]: value }));
@@ -41,12 +55,13 @@ export default function ContactBox() {
         <InputBox>
           <Text>SNS 링크</Text>
           <Input
-            name="link"
-            value={link}
+            name="url"
+            value={url}
             onChange={ContactInputChange}
             minLength={2}
             maxLength={50}
             placeholder="연락할 수 있는 SNS 링크를 입력해주세요."
+            autoComplete="off"
           />
         </InputBox>
         <InputBox>
@@ -58,6 +73,7 @@ export default function ContactBox() {
             minLength={5}
             maxLength={30}
             placeholder="이메일 주소를 입력해주세요."
+            autoComplete="off"
           />
 
           <Message>

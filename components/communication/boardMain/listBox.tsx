@@ -1,17 +1,36 @@
 import { listItem } from "@/docs/communication/listDocs";
 import { theme } from "@/styles/theme";
 import styled from "@emotion/styled";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import instance from "@/util/axios";
+import Result from "@/pages/smcq/result";
 
 export default function ListBox() {
   const [starState, setStarState] = useState<boolean>(false);
+  const [feedList, setfeedList] = useState<any[]>([]);
 
   const onStarState = () => {
     setStarState((pre) => !pre);
     if (starState === true) {
     }
   };
+
+  // const PostList = async () => {
+  //   try {
+  //     const res = await instance.get("/feeds/list");
+  //     console.log("call");
+  //     console.log(res.data);
+  //     setfeedList(res.data.feed_response_list);
+  //   } catch (error) {
+  //     console.log(error);
+  //     throw error;
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   PostList();
+  // }, []);
 
   return (
     <Container>

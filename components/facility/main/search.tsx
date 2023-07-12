@@ -1,5 +1,6 @@
 import { theme } from "@/styles/theme";
 import styled from "@emotion/styled";
+import Link from "next/link";
 
 export default function Search() {
   return (
@@ -8,7 +9,9 @@ export default function Search() {
         <Image src="/imgs/facility/search.png" />
         <Input placeholder="시설명을 입력해보세요." />
       </InputBox>
-      <Button>검색</Button>
+      <Link href="/facility/blackMain">
+        <Button>검색</Button>
+      </Link>
     </Container>
   );
 }

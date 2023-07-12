@@ -6,7 +6,11 @@ export default function List() {
   return (
     <Container>
       <ItemBox>
-        {item.map((arr, i) => (
+        <TextBox>
+          <Title>등록된 리뷰가 없습니다.🥲</Title>
+          <Text>시설 리뷰를 작성해보세요!</Text>
+        </TextBox>
+        {/* {item.map((arr, i) => (
           <Item key={i}>
             <Inner>
               <ScoreBox>
@@ -29,7 +33,7 @@ export default function List() {
               </UserBox>
             </Inner>
           </Item>
-        ))}
+        ))} */}
       </ItemBox>
     </Container>
   );
@@ -54,7 +58,7 @@ const ItemBox = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
   & > div {
     &:first-child {
       margin-top: 660px;
@@ -132,4 +136,26 @@ const Date = styled.p`
   font-size: 14px;
   font-weight: 500;
   color: ${theme.nineGrayColor};
+`;
+
+const TextBox = styled.div`
+  position: absolute;
+  top: 550px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+`;
+
+const Title = styled.h1`
+  margin-bottom: 10px;
+  font-size: 26px;
+  font-weight: 600;
+  color: ${theme.blackColor};
+`;
+
+const Text = styled.p`
+  font-size: 16px;
+  font-weight: 500;
+  color: ${theme.strongGrayColor};
 `;

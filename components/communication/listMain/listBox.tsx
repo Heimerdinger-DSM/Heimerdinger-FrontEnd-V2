@@ -3,6 +3,7 @@ import { theme } from "@/styles/theme";
 import styled from "@emotion/styled";
 import { useState } from "react";
 import Link from "next/link";
+import { blackListItem } from "@/docs/communication/blackListDocs";
 
 export default function ListBox() {
   const [starState, setStarState] = useState<boolean>(false);
@@ -15,7 +16,7 @@ export default function ListBox() {
 
   return (
     <Container>
-      {listItem.map((arr, i) => (
+      {blackListItem.map((arr, i) => (
         <Link href="/" key={i}>
           <Item>
             <Wrapper>

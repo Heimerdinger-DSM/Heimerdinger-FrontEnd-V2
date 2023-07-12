@@ -1,11 +1,12 @@
 import { theme } from "@/styles/theme";
 import styled from "@emotion/styled";
+import Link from "next/link";
 
 export default function Footer() {
   const item = [
     {
       img: "/imgs/main/footer/people.png",
-      link: "",
+      link: "/member",
     },
     {
       img: "/imgs/main/footer/notion.png",
@@ -33,7 +34,9 @@ export default function Footer() {
         <RouteBox>
           {item.map((arr, i) => (
             <Route key={i}>
-              <Image src={arr.img} />
+              <Link href="/member">
+                <Image src={arr.img} />
+              </Link>
             </Route>
           ))}
         </RouteBox>

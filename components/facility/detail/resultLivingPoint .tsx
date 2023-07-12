@@ -1,14 +1,14 @@
 import { theme } from "@/styles/theme";
 import styled from "@emotion/styled";
 
-export default function LivingPoint() {
+export default function ResultLivingPoint() {
   return (
     <Container>
       <Title>리빙 포인트</Title>
       <Wrapper>
         <Frame>
           <Text>친절</Text>
-          <Percentage></Percentage>
+          <Percentagedkd></Percentagedkd>
         </Frame>
         <Frame>
           <Text>깔끔</Text>
@@ -66,4 +66,11 @@ const Percentage = styled.div`
   height: 20px;
   border-radius: 10px;
   background-color: ${theme.lightGrayColor};
+`;
+
+const Percentagedkd = styled.div`
+  width: 400px;
+  height: 20px;
+  border-radius: 10px;
+  background-color: ${theme.mainPurpleColor};
 `;

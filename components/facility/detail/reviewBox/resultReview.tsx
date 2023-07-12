@@ -2,8 +2,9 @@ import { theme } from "@/styles/theme";
 import styled from "@emotion/styled";
 import List from "./list";
 import Link from "next/link";
+import ResultList from "./resultList";
 
-export default function Review() {
+export default function ResultReview() {
   return (
     <Container>
       <Wrapper>
@@ -24,7 +25,7 @@ export default function Review() {
             <Button>등록</Button>
           </Link>
         </InputBox>
-        <List />
+        <ResultList />
       </Wrapper>
     </Container>
   );
