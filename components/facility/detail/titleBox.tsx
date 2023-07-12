@@ -4,17 +4,15 @@ import styled from "@emotion/styled";
 export default function TitleBox() {
   return (
     <Container>
-      <Title>대전광역시 중구 치매 안심센터</Title>
-      <Category>
-        의료기관 {">"} 요양병원 {">"} 요양병원(민간) {">"} 요양병원
-      </Category>
+      <Title>대전광역시 유성구 치매안심센터</Title>
+      <Category>치매센터 {">"} 치매안심센터</Category>
       <InfoBox>
         <Wrapper>
-          <CenterTag>중앙센터</CenterTag>
-          <AreaTag>중구</AreaTag>
-          <Phone>전화번호 I 042-288-8180</Phone>
+          <CenterTag>치매센터</CenterTag>
+          <AreaTag>유성구</AreaTag>
+          <Phone>전화번호 I 042-611-5018</Phone>
         </Wrapper>
-        <Address>대전광역시 중구 계룡로 943 (대사동)</Address>
+        <Address>대전 유성구 박산로 177 (구암동) 유성구보건소 2층</Address>
       </InfoBox>
     </Container>
   );

@@ -2,15 +2,27 @@ import { theme } from "@/styles/theme";
 import styled from "@emotion/styled";
 import List from "./list";
 import Link from "next/link";
+import CreateList from "./createList";
+import { useState } from "react";
 
-export default function Review() {
-  return (
-    <Container>
-      <Wrapper>
-        <TitleBox>
-          <Title>리뷰</Title>
-          <Content>별점을 선택해주세요.</Content>
-        </TitleBox>
+export default function CreateReview() {
+  const [state, setState] = useState(false);
+
+  const dkd = () => {
+    setState(true);
+  };
+
+  const onClickTag = () => (
+    <div>
+      {state === true ? (
+        <StarBox>
+          <Star src="/imgs/facility/star.png" />
+          <Star src="/imgs/facility/star.png" />
+          <Star src="/imgs/facility/star.png" />
+          <Star src="/imgs/facility/star.png" />
+          <Star src="/imgs/facility/noStar.png" />
+        </StarBox>
+      ) : (
         <StarBox>
           <Star src="/imgs/facility/noStar.png" />
           <Star src="/imgs/facility/noStar.png" />
@@ -18,13 +30,20 @@ export default function Review() {
           <Star src="/imgs/facility/noStar.png" />
           <Star src="/imgs/facility/noStar.png" />
         </StarBox>
-        <InputBox>
-          <Input placeholder="시설에 대한 리뷰를 등록해보세요." />
-          <Link href="/facility/blackDetail/1">
-            <Button>등록</Button>
-          </Link>
-        </InputBox>
-        <List />
+      )}
+    </div>
+  );
+
+  return (
+    <Container>
+      <Wrapper onClick={dkd}>
+        <TitleBox>
+          <Title>리뷰</Title>
+          <Content>별점을 선택해주세요.</Content>
+        </TitleBox>
+        <StarBox>{onClickTag()}</StarBox>
+        <Line></Line>
+        <CreateList />
       </Wrapper>
     </Container>
   );
@@ -84,33 +103,8 @@ const Star = styled.img`
   width: 40px;
 `;
 
-const InputBox = styled.div`
+const Line = styled.div`
   width: 100%;
-  margin-top: 22px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-const Input = styled.input`
-  width: 620px;
-  height: 50px;
-  padding-left: 20px;
-  border: 1px solid ${theme.lightGrayColor};
-  border-radius: 8px;
-  outline: none;
-  font-size: 14px;
-  background-color: ${theme.whiteColor};
-`;
-
-const Button = styled.button`
-  width: 140px;
-  height: 50px;
-  border: none;
-  border-radius: 6px;
-  outline: none;
-  font-size: 16px;
-  font-weight: 700;
-  color: ${theme.whiteColor};
-  background-color: ${theme.mainPurpleColor};
+  margin-top: 20px;
+  border-bottom: 1px solid ${theme.thinGrayColor};
 `;

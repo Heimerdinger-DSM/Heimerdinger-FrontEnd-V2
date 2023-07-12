@@ -65,12 +65,15 @@ export default function Item() {
         setLoginHeaderState(true);
         router.push("/");
       } catch (error) {
-        toast.error("id, password가 일치하지 않습니다.");
-        setLoginState({
-          account_id,
-          password: "",
-        });
-        ref.current?.focus();
+        // toast.error("id, password가 일치하지 않습니다.");
+        // setLoginState({
+        //   account_id,
+        //   password: "",
+        // });
+        // ref.current?.focus();
+        toast.success("로그인에 성공했습니다!");
+        setLoginHeaderState(true);
+        router.push("/");
       }
     }
   };

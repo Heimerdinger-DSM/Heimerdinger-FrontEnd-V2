@@ -1,7 +1,11 @@
 import { theme } from "@/styles/theme";
+import { createPost } from "@/util/api/createPost";
+import { createContact } from "@/util/store/createContact";
 import styled from "@emotion/styled";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 export default function WriteBox() {
   const tagItem = ["중구", "동구", "서구", "유성구", "대덕구"];
@@ -9,10 +13,14 @@ export default function WriteBox() {
     title: "",
     content: "",
   });
+  const contactItem = useRecoilValue(createContact);
+  const router = useRouter();
 
   const { title, content } = writeState;
 
-  const WriteInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const WriteInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { value, name } = e.target;
 
     if (value === "") {
@@ -21,34 +29,40 @@ export default function WriteBox() {
       if (name === "title" && value.length >= 20) {
         toast.error("제목은 20자 이하로 작성할 수 있습니다.");
       }
-      if (name === "content" && value.length >= 255) {
-        toast.error("내용은 255자 이하로 작성할 수 있습니다.");
-      }
+      // if (name === "content" && value.length >= 255) {
+      //   toast.error("내용은 255자 이하로 작성할 수 있습니다.");
+      // }
     }
 
     setWriteState((pre) => ({ ...pre, [name]: value }));
   };
 
   //지역 태그 선택
-  const [tag, setTag] = useState<boolean[]>([
-    false,
-    false,
-    false,
-    false,
-    false,
-  ]);
+  const [tag, setTag] = useState<number>(-1);
 
   const onClickTag = tagItem.map((list, i) => (
     <div
       key={i}
       onClick={() => {
-        setTag(tag.map((arr, index) => i === index));
+        setTag(i);
       }}
     >
-      {tag[i] ? <ClickTag>{list}</ClickTag> : <Tag>{list}</Tag>}
+      {i === tag ? <ClickTag>{list}</ClickTag> : <Tag>{list}</Tag>}
     </div>
   ));
 
+  const submitCreatePost = () => {
+    if (title === "" || content === "") {
+      toast.error("채워지지 않은 입력칸이 있습니다.");
+    } else {
+      try {
+        toast.success("게시글 생성에 성공했습니다!");
+        router.push("/communication/blackmain");
+      } catch (error) {
+        toast.error("게시글 생성에 실패했습니다.");
+      }
+    }
+  };
   return (
     <Container>
       <TitleBox>
@@ -89,13 +103,13 @@ export default function WriteBox() {
             value={content}
             onChange={WriteInputChange}
             minLength={1}
-            maxLength={255}
+            maxLength={2000}
             placeholder="글 내용을 입력해주세요."
           ></Textarea>
         </InputBox>
       </ItemBox>
 
-      <Button>글 등록하기</Button>
+      <Button onClick={submitCreatePost}>글 등록하기</Button>
     </Container>
   );
 }

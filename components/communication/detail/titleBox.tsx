@@ -5,7 +5,7 @@ export default function TitleBox() {
   return (
     <Container>
       <Wrapper>
-        <Title>파꽃나라 파꽃공주님</Title>
+        <Title>하이머딩거 프젝 화이팅입니다</Title>
         <Tag>중구</Tag>
       </Wrapper>
 
@@ -13,19 +13,19 @@ export default function TitleBox() {
         <LinkBox>
           <Link>
             <Key>카카오톡 오픈 채팅</Key>
-            <Value>https://google.sdkljflskjflsjfl</Value>
+            <Value>https://dsmhs.djsch.kr/main.do</Value>
           </Link>
           <Link>
             <Key>이메일</Key>
-            <Value>pjungae0423@dsm.hs.kr</Value>
+            <Value>hange253@gmail.com</Value>
           </Link>
         </LinkBox>
 
         <InfoBox>
-          <Nickname>파꽃공주님</Nickname>
-          <Id>jungae34</Id>
+          <Nickname>남승권</Nickname>
+          <Id>southwinbook</Id>
           <Id>I</Id>
-          <Date>2023.03.21</Date>
+          <Date>2023.06.14</Date>
         </InfoBox>
       </Frame>
     </Container>

@@ -1,19 +1,19 @@
 import { theme } from "@/styles/theme";
 import styled from "@emotion/styled";
 
-export default function Grade() {
+export default function ResultGrade() {
   return (
     <Container>
       <Title>사용자 평점</Title>
-      <Number>0.0</Number>
+      <Number>4.0</Number>
       <StarBox>
-        <Star src="/imgs/facility/noStar.png" />
-        <Star src="/imgs/facility/noStar.png" />
-        <Star src="/imgs/facility/noStar.png" />
-        <Star src="/imgs/facility/noStar.png" />
+        <Star src="/imgs/facility/star.png" />
+        <Star src="/imgs/facility/star.png" />
+        <Star src="/imgs/facility/star.png" />
+        <Star src="/imgs/facility/star.png" />
         <Star src="/imgs/facility/noStar.png" />
       </StarBox>
-      <People>0명 참여</People>
+      <People>1명 참여</People>
     </Container>
   );
 }

@@ -5,6 +5,7 @@
   margin: 0;
   box-sizing: border-box;
   font-family: "Nanum Gothic", sans-serif;
+  text-decoration: none;
 
   &::selection {
     background: #d5d0ff;

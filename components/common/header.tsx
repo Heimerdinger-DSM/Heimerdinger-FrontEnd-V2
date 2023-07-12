@@ -20,21 +20,21 @@ export default function Header() {
             <Link href="/facility/main">
               <Text>치매시설정보</Text>
             </Link>
-            <Link href="/smcq">
+            <Link href="/smcq/main">
               <Text>치매자가진단</Text>
             </Link>
-            <Link href="/">
+            <Link href="/game/choice">
               <Text>치매예방 프로그램</Text>
             </Link>
           </TextBox>
         </Frame>
         {version ? (
-          <Link href="/login">
-            <Button>로그인</Button>
-          </Link>
-        ) : (
           <Link href="/mypage">
             <Image src="/imgs/header/profile.png" />
+          </Link>
+        ) : (
+          <Link href="/login">
+            <Button>로그인</Button>
           </Link>
         )}
       </Wrapper>
